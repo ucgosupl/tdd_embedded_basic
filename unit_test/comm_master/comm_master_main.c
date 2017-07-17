@@ -1,5 +1,7 @@
 #include "unity/fixture/unity_fixture.h"
 
+#include <stdio.h>
+
 static void run_all_tests(void);
 
 int main(int argc, const char **argv)
@@ -11,6 +13,8 @@ int main(int argc, const char **argv)
 
 static void run_all_tests(void)
 {
-	UnityPrint("Tx tests:\r\n");
+	printf("Tx tests:\n");
 	RUN_TEST_GROUP(comm_master_tx);
+	printf("\nRx tests:\n");
+	RUN_TEST_GROUP(comm_master_rx);
 }

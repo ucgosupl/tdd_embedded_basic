@@ -9,5 +9,6 @@ typedef uint16_t comm_seq_t;
 typedef uint16_t comm_crc_t;
 
 int32_t comm_master_tx(comm_addr_t addr, uint8_t *buf);
+int32_t comm_master_rx(uint8_t *buf);
 
 #endif /* _COMM_MASTER_H_ */
