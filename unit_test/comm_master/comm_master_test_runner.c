@@ -1,7 +1,11 @@
 #include "unity/fixture/unity_fixture.h"
 
-TEST_GROUP_RUNNER(comm_master)
+TEST_GROUP_RUNNER(comm_master_tx)
 {
-   /* Test cases to run */
-   RUN_TEST_CASE(comm_master, first);
+   RUN_TEST_CASE(comm_master_tx, arg_buf);
+   RUN_TEST_CASE(comm_master_tx, arg_addr);
+
+   RUN_TEST_CASE(comm_master_tx, addr);
+   RUN_TEST_CASE(comm_master_tx, seq);
+   RUN_TEST_CASE(comm_master_tx, crc);
 }
