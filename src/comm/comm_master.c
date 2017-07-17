@@ -56,7 +56,7 @@ int32_t comm_master_rx(uint8_t *buf)
 
 	memcpy(&seq_read, &buf[2], sizeof(comm_seq_t));
 
-	if (seq_sent + 1 != seq_read)
+	if ((comm_seq_t)(seq_sent + 1) != seq_read)
 	{
 		return -EPERM;
 	}

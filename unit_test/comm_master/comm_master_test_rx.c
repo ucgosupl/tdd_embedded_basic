@@ -99,6 +99,19 @@ TEST(comm_master_rx, seq)
 	TEST_ASSERT_EQUAL(-EPERM, comm_master_rx(test_buf));
 }
 
+TEST(comm_master_rx, seq_overflow)
+{
+	comm_seq_t seq_read;
+	comm_seq_t seq_sent;
+
+	seq_read = 0;
+	seq_sent = 0xFFFF;
+	mock_comm_table_seq_init(seq_sent);
+	prepare_buf(test_buf, ADDR, seq_read, CRC);
+
+	TEST_ASSERT_EQUAL(0, comm_master_rx(test_buf));
+}
+
 static void prepare_buf(uint8_t *buf, comm_addr_t addr, comm_seq_t seq, comm_crc_t crc)
 {
 	memcpy(&buf[0], &addr, sizeof(comm_addr_t));

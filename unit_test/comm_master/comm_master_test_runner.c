@@ -19,4 +19,6 @@ TEST_GROUP_RUNNER(comm_master_rx)
 
    RUN_TEST_CASE(comm_master_rx, addr);
    RUN_TEST_CASE(comm_master_rx, seq);
+
+   RUN_TEST_CASE(comm_master_rx, seq_overflow);
 }
