@@ -83,7 +83,7 @@ TEST(comm_master_tx, crc)
 
 	comm_master_tx(ADDR, test_buf);
 
-	memcpy(&crc_actual, &test_buf[COMM_FRAME_NO_CRC_SIZE], sizeof(comm_seq_t));
+	memcpy(&crc_actual, &test_buf[COMM_FRAME_NO_CRC_SIZE], sizeof(comm_crc_t));
 	TEST_ASSERT_EQUAL_HEX(crc_expected, crc_actual);
 	TEST_ASSERT_EQUAL(1, mock_comm_crc_cnt_get());
 	TEST_ASSERT_EQUAL_PTR(test_buf, mock_comm_crc_arg_buf_get());
