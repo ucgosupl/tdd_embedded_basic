@@ -12,5 +12,5 @@ TEST_GROUP_RUNNER(comm_master_tx)
 
 TEST_GROUP_RUNNER(comm_master_rx)
 {
-   RUN_TEST_CASE(comm_master_rx, first_test);
+   RUN_TEST_CASE(comm_master_rx, arg_buf);
 }

@@ -24,7 +24,8 @@ TEST_TEAR_DOWN(comm_master_rx)
    /* Cleanup after every test */
 }
 
-TEST(comm_master_rx, first_test)
+TEST(comm_master_rx, arg_buf)
 {
-   TEST_FAIL_MESSAGE("Implement test!");
+	TEST_ASSERT_EQUAL(COMM_ERR_INVALID, comm_master_rx(NULL));
+	TEST_ASSERT_EQUAL(COMM_ERR_OK, comm_master_rx(test_buf));
 }

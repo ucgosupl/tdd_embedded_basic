@@ -32,3 +32,13 @@ int32_t comm_master_tx(comm_addr_t addr, uint8_t *buf)
 
 	return COMM_ERR_OK;
 }
+
+int32_t comm_master_rx(uint8_t *buf)
+{
+	if (NULL == buf)
+	{
+		return COMM_ERR_INVALID;
+	}
+
+	return COMM_ERR_OK;
+}
