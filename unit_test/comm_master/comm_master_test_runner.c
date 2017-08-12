@@ -1,11 +1,11 @@
 #include "unity/fixture/unity_fixture.h"
 
-TEST_GROUP_RUNNER(comm_master)
+TEST_GROUP_RUNNER(comm_master_tx)
 {
-   RUN_TEST_CASE(comm_master, arg_buf);
-   RUN_TEST_CASE(comm_master, arg_addr);
+   RUN_TEST_CASE(comm_master_tx, arg_buf);
+   RUN_TEST_CASE(comm_master_tx, arg_addr);
 
-   RUN_TEST_CASE(comm_master, frame_addr);
-   RUN_TEST_CASE(comm_master, frame_seq);
-   RUN_TEST_CASE(comm_master, frame_crc);
+   RUN_TEST_CASE(comm_master_tx, frame_addr);
+   RUN_TEST_CASE(comm_master_tx, frame_seq);
+   RUN_TEST_CASE(comm_master_tx, frame_crc);
 }

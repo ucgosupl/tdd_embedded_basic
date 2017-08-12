@@ -12,25 +12,25 @@
 
 uint8_t test_buf[TEST_BUF_SIZE];
 
-TEST_GROUP(comm_master);
+TEST_GROUP(comm_master_tx);
 
-TEST_SETUP(comm_master)
+TEST_SETUP(comm_master_tx)
 {
    memset(test_buf, 0xAA, TEST_BUF_SIZE);
 }
 
-TEST_TEAR_DOWN(comm_master)
+TEST_TEAR_DOWN(comm_master_tx)
 {
    /* Cleanup after every test */
 }
 
-TEST(comm_master, arg_buf)
+TEST(comm_master_tx, arg_buf)
 {
 	TEST_ASSERT_EQUAL(COMM_ERR_INVALID, comm_master_tx(ADDR, NULL));
 	TEST_ASSERT_EQUAL(COMM_ERR_OK, comm_master_tx(ADDR, test_buf));
 }
 
-TEST(comm_master, arg_addr)
+TEST(comm_master_tx, arg_addr)
 {
 	TEST_ASSERT_EQUAL(COMM_ERR_INVALID, comm_master_tx(0x0000, test_buf));
 	TEST_ASSERT_EQUAL(COMM_ERR_OK, comm_master_tx(0x0001, test_buf));
@@ -38,7 +38,7 @@ TEST(comm_master, arg_addr)
 	TEST_ASSERT_EQUAL(COMM_ERR_INVALID, comm_master_tx(0xFFFF, test_buf));
 }
 
-TEST(comm_master, frame_addr)
+TEST(comm_master_tx, frame_addr)
 {
    comm_addr_t addr_expected;
    comm_addr_t addr_actual;
@@ -54,7 +54,7 @@ TEST(comm_master, frame_addr)
    TEST_ASSERT_EQUAL_HEX16(addr_expected, addr_actual);
 }
 
-TEST(comm_master, frame_seq)
+TEST(comm_master_tx, frame_seq)
 {
 	comm_seq_t seq_expected;
 	comm_seq_t seq_actual;
@@ -75,7 +75,7 @@ TEST(comm_master, frame_seq)
 	TEST_ASSERT_EQUAL(ADDR, mock_comm_table_seq_arg_addr_get());
 }
 
-TEST(comm_master, frame_crc)
+TEST(comm_master_tx, frame_crc)
 {
 	comm_crc_t crc_expected;
 	comm_crc_t crc_actual;

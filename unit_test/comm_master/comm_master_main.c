@@ -11,5 +11,5 @@ int main(int argc, const char **argv)
 
 static void run_all_tests(void)
 {
-   RUN_TEST_GROUP(comm_master);
+   RUN_TEST_GROUP(comm_master_tx);
 }
