@@ -14,7 +14,7 @@ TEST_TEAR_DOWN(comm_master)
    /* Cleanup after every test */
 }
 
-TEST(comm_master, first)
+TEST(comm_master, arg_buf)
 {
-   TEST_FAIL_MESSAGE("initial test setup");
+	TEST_ASSERT_EQUAL(-1, comm_master_tx(15, NULL));
 }
