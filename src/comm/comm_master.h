@@ -1,8 +1,11 @@
 #ifndef _COMM_MASTER_H_
 #define _COMM_MASTER_H_
 
+#define COMM_FRAME_SIZE			16
+
 typedef uint16_t comm_addr_t;
 typedef uint16_t comm_seq_t;
+typedef uint16_t comm_crc_t;
 
 enum
 {

@@ -74,3 +74,18 @@ TEST(comm_master, frame_seq)
 	TEST_ASSERT_EQUAL(1, mock_comm_table_seq_cnt_get());
 	TEST_ASSERT_EQUAL(ADDR, mock_comm_table_seq_arg_addr_get());
 }
+
+TEST(comm_master, frame_crc)
+{
+	comm_crc_t crc_expected;
+	comm_crc_t crc_actual;
+
+	crc_expected = 0x55AA;
+	/* Set expected CRC in module returning calculated CRC. */
+
+	comm_master_tx(ADDR, test_buf);
+
+	memcpy(&crc_actual, &test_buf[COMM_FRAME_SIZE - sizeof(comm_crc_t)], sizeof(comm_crc_t));
+	TEST_ASSERT_EQUAL_HEX16(crc_expected, crc_actual);
+	/* Check if CRC module function was correctly called. */
+}
