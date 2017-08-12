@@ -9,3 +9,8 @@ TEST_GROUP_RUNNER(comm_master_tx)
    RUN_TEST_CASE(comm_master_tx, frame_seq);
    RUN_TEST_CASE(comm_master_tx, frame_crc);
 }
+
+TEST_GROUP_RUNNER(comm_master_rx)
+{
+   RUN_TEST_CASE(comm_master_rx, first_test);
+}

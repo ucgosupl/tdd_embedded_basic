@@ -11,5 +11,8 @@ int main(int argc, const char **argv)
 
 static void run_all_tests(void)
 {
-   RUN_TEST_GROUP(comm_master_tx);
+	printf("Master Tx tests:\n");
+	RUN_TEST_GROUP(comm_master_tx);
+	printf("\nMaster Rx tests:\n");
+	RUN_TEST_GROUP(comm_master_rx);
 }
