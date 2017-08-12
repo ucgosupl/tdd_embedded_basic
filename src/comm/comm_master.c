@@ -9,8 +9,8 @@ int32_t comm_master_tx(uint16_t addr, uint8_t *buf)
 
 	if (NULL == buf)
 	{
-		return -1;
+		return COMM_ERR_INVALID;
 	}
 
-	return 0;
+	return COMM_ERR_OK;
 }
