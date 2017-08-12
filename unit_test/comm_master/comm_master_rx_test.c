@@ -9,8 +9,12 @@
 
 #define TEST_BUF_SIZE	32
 #define ADDR			15
+#define SEQ				0xAA55
+#define CRC				0xCC33
 
 uint8_t test_buf[TEST_BUF_SIZE];
+
+static void prepare_buf(uint8_t *buf, comm_addr_t addr, comm_seq_t seq);
 
 TEST_GROUP(comm_master_rx);
 
@@ -50,4 +54,26 @@ TEST(comm_master_rx, frame_crc_args)
 	TEST_ASSERT_EQUAL(1, mock_comm_crc_cnt_get());
 	TEST_ASSERT_EQUAL_PTR(test_buf, mock_comm_crc_arg_buf_get());
 	TEST_ASSERT_EQUAL(COMM_FRAME_SIZE, mock_comm_crc_arg_len_get());
+}
+
+TEST(comm_master_rx, frame_addr)
+{
+	comm_addr_t addr;
+
+	/* Given frame buffer content with specific addr value. */
+	addr = ADDR;
+	prepare_buf(test_buf, addr, SEQ);
+	mock_comm_table_seq_init(0);
+
+	/* When tested function is called. */
+	comm_master_rx(test_buf);
+
+	/* Address from frame buffer is passed to comm table function. */
+	TEST_ASSERT_EQUAL(1, mock_comm_table_seq_cnt_get());
+	TEST_ASSERT_EQUAL(addr, mock_comm_table_seq_arg_addr_get());
+}
+
+static void prepare_buf(uint8_t *buf, comm_addr_t addr, comm_seq_t seq)
+{
+	memcpy(&buf[0], &addr, sizeof(comm_addr_t));
 }

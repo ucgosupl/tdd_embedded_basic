@@ -35,6 +35,7 @@ int32_t comm_master_tx(comm_addr_t addr, uint8_t *buf)
 
 int32_t comm_master_rx(uint8_t *buf)
 {
+	comm_addr_t addr;
 	comm_crc_t crc;
 
 	if (NULL == buf)
@@ -48,6 +49,9 @@ int32_t comm_master_rx(uint8_t *buf)
 	{
 		return COMM_ERR_CRC;
 	}
+
+	memcpy(&addr, &buf[0], sizeof(comm_addr_t));
+	comm_table_seq_get(addr);
 
 	return COMM_ERR_OK;
 }
