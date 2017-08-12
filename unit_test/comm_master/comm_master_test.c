@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 #include "unity/fixture/unity_fixture.h"
 
 #include "comm/comm_master.h"
