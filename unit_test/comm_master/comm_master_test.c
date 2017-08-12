@@ -5,6 +5,7 @@
 #include "unity/fixture/unity_fixture.h"
 
 #include "comm/comm_master.h"
+#include "mocks/comm_master_mocks.h"
 
 #define TEST_BUF_SIZE	32
 #define ADDR			15
@@ -58,12 +59,18 @@ TEST(comm_master, frame_seq)
 	comm_seq_t seq_expected;
 	comm_seq_t seq_actual;
 
+	/* Given sequence number provided to conn table. */
 	seq_expected = 0xAA55;
-	/* Set expected sequence number in comm module data. */
+	mock_comm_table_seq_init(seq_expected);
 
+	/* When tested function is called. */
 	comm_master_tx(ADDR, test_buf);
 
+	/* Then seq nr in frame buffer matches seq nr provided. */
 	memcpy(&seq_actual, &test_buf[2], sizeof(comm_seq_t));
 	TEST_ASSERT_EQUAL_HEX16(seq_expected, seq_actual);
-	/* Check if sequence number in comm module data was correctly handled. */
+
+	/* Check if conn table function was called with correct address as argument. */
+	TEST_ASSERT_EQUAL(1, mock_comm_table_seq_cnt_get());
+	TEST_ASSERT_EQUAL(ADDR, mock_comm_table_seq_arg_addr_get());
 }
