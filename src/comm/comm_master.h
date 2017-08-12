@@ -12,6 +12,7 @@ enum
 {
 	COMM_ERR_OK = 0,
 	COMM_ERR_INVALID = -1,
+	COMM_ERR_CRC = -2,
 };
 
 int32_t comm_master_tx(comm_addr_t addr, uint8_t *buf);
