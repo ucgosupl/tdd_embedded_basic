@@ -95,6 +95,19 @@ TEST(comm_master_rx, frame_seq)
 	TEST_ASSERT_EQUAL(COMM_ERR_SEQ, comm_master_rx(test_buf));
 }
 
+TEST(comm_master_rx, frame_seq_overflow)
+{
+	comm_seq_t seq_read;
+	comm_seq_t seq_sent;
+
+	seq_read = 0;
+	seq_sent = 0xFFFF;
+	mock_comm_table_seq_init(seq_sent);
+	prepare_buf(test_buf, ADDR, seq_read);
+
+	TEST_ASSERT_EQUAL(COMM_ERR_OK, comm_master_rx(test_buf));
+}
+
 static void prepare_buf(uint8_t *buf, comm_addr_t addr, comm_seq_t seq)
 {
 	memcpy(&buf[0], &addr, sizeof(comm_addr_t));
