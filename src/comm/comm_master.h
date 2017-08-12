@@ -2,6 +2,7 @@
 #define _COMM_MASTER_H_
 
 #define COMM_FRAME_SIZE			16
+#define COMM_FRAME_NO_CRC_SIZE	(COMM_FRAME_SIZE - sizeof(comm_crc_t))
 
 typedef uint16_t comm_addr_t;
 typedef uint16_t comm_seq_t;

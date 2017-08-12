@@ -88,11 +88,11 @@ TEST(comm_master, frame_crc)
 	comm_master_tx(ADDR, test_buf);
 
 	/* Then CRC in frame buffer matches CRC provided. */
-	memcpy(&crc_actual, &test_buf[COMM_FRAME_SIZE - sizeof(comm_crc_t)], sizeof(comm_crc_t));
+	memcpy(&crc_actual, &test_buf[COMM_FRAME_NO_CRC_SIZE], sizeof(comm_crc_t));
 	TEST_ASSERT_EQUAL_HEX16(crc_expected, crc_actual);
 
 	/* Check if CRC function was called with correct arguments. */
 	TEST_ASSERT_EQUAL(1, mock_comm_crc_cnt_get());
 	TEST_ASSERT_EQUAL_PTR(test_buf, mock_comm_crc_arg_buf_get());
-	TEST_ASSERT_EQUAL(COMM_FRAME_SIZE - sizeof(comm_crc_t), mock_comm_crc_arg_len_get());
+	TEST_ASSERT_EQUAL(COMM_FRAME_NO_CRC_SIZE, mock_comm_crc_arg_len_get());
 }
