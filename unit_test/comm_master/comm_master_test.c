@@ -52,3 +52,18 @@ TEST(comm_master, frame_addr)
    memcpy(&addr_actual, &test_buf[0], sizeof(comm_addr_t));
    TEST_ASSERT_EQUAL_HEX16(addr_expected, addr_actual);
 }
+
+TEST(comm_master, frame_seq)
+{
+	comm_seq_t seq_expected;
+	comm_seq_t seq_actual;
+
+	seq_expected = 0xAA55;
+	/* Set expected sequence number in comm module data. */
+
+	comm_master_tx(ADDR, test_buf);
+
+	memcpy(&seq_actual, &test_buf[2], sizeof(comm_seq_t));
+	TEST_ASSERT_EQUAL_HEX16(seq_expected, seq_actual);
+	/* Check if sequence number in comm module data was correctly handled. */
+}

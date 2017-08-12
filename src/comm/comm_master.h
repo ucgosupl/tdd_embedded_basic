@@ -2,6 +2,7 @@
 #define _COMM_MASTER_H_
 
 typedef uint16_t comm_addr_t;
+typedef uint16_t comm_seq_t;
 
 enum
 {
