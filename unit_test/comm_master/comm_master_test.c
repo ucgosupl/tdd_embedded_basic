@@ -30,5 +30,8 @@ TEST(comm_master, arg_buf)
 
 TEST(comm_master, arg_addr)
 {
-   TEST_FAIL_MESSAGE("Implement test!");
+	TEST_ASSERT_EQUAL(COMM_ERR_INVALID, comm_master_tx(0x0000, test_buf));
+	TEST_ASSERT_EQUAL(COMM_ERR_OK, comm_master_tx(0x0001, test_buf));
+	TEST_ASSERT_EQUAL(COMM_ERR_OK, comm_master_tx(0xFFFE, test_buf));
+	TEST_ASSERT_EQUAL(COMM_ERR_INVALID, comm_master_tx(0xFFFF, test_buf));
 }
