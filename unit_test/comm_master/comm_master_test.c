@@ -80,12 +80,19 @@ TEST(comm_master, frame_crc)
 	comm_crc_t crc_expected;
 	comm_crc_t crc_actual;
 
+	/* Given CRC provided to CRC module. */
 	crc_expected = 0x55AA;
-	/* Set expected CRC in module returning calculated CRC. */
+	mock_comm_crc_init(crc_expected);
 
+	/* When tested function is called. */
 	comm_master_tx(ADDR, test_buf);
 
+	/* Then CRC in frame buffer matches CRC provided. */
 	memcpy(&crc_actual, &test_buf[COMM_FRAME_SIZE - sizeof(comm_crc_t)], sizeof(comm_crc_t));
 	TEST_ASSERT_EQUAL_HEX16(crc_expected, crc_actual);
-	/* Check if CRC module function was correctly called. */
+
+	/* Check if CRC function was called with correct arguments. */
+	TEST_ASSERT_EQUAL(1, mock_comm_crc_cnt_get());
+	TEST_ASSERT_EQUAL_PTR(test_buf, mock_comm_crc_arg_buf_get());
+	TEST_ASSERT_EQUAL(COMM_FRAME_SIZE - sizeof(comm_crc_t), mock_comm_crc_arg_len_get());
 }
