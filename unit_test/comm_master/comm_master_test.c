@@ -6,6 +6,7 @@
 #include "comm/comm_master.h"
 
 #define TEST_BUF_SIZE	32
+#define ADDR			15
 
 uint8_t test_buf[TEST_BUF_SIZE];
 
@@ -23,6 +24,6 @@ TEST_TEAR_DOWN(comm_master)
 
 TEST(comm_master, arg_buf)
 {
-	TEST_ASSERT_EQUAL(-1, comm_master_tx(15, NULL));
-	TEST_ASSERT_EQUAL(0, comm_master_tx(15, test_buf));
+	TEST_ASSERT_EQUAL(-1, comm_master_tx(ADDR, NULL));
+	TEST_ASSERT_EQUAL(0, comm_master_tx(ADDR, test_buf));
 }
