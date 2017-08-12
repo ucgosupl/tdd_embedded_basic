@@ -6,7 +6,7 @@
 
 typedef uint16_t comm_addr_t;
 typedef uint16_t comm_seq_t;
-typedef uint16_t comm_crc_t;
+typedef uint32_t comm_crc_t;
 
 enum
 {
