@@ -15,4 +15,5 @@ TEST_GROUP_RUNNER(comm_master_rx)
    RUN_TEST_CASE(comm_master_rx, arg_buf);
 
    RUN_TEST_CASE(comm_master_rx, frame_crc_ret);
+   RUN_TEST_CASE(comm_master_rx, frame_crc_args);
 }

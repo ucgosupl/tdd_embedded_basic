@@ -42,3 +42,12 @@ TEST(comm_master_rx, frame_crc_ret)
 
 	TEST_ASSERT_EQUAL(COMM_ERR_CRC, comm_master_rx(test_buf));
 }
+
+TEST(comm_master_rx, frame_crc_args)
+{
+	comm_master_rx(test_buf);
+
+	TEST_ASSERT_EQUAL(1, mock_comm_crc_cnt_get());
+	TEST_ASSERT_EQUAL_PTR(test_buf, mock_comm_crc_arg_buf_get());
+	TEST_ASSERT_EQUAL(COMM_FRAME_SIZE, mock_comm_crc_arg_len_get());
+}

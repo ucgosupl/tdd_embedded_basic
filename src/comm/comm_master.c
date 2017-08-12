@@ -42,7 +42,8 @@ int32_t comm_master_rx(uint8_t *buf)
 		return COMM_ERR_INVALID;
 	}
 
-	crc = comm_crc_get(NULL, 0);
+	/* When calculating CRC of data stream ended with correct CRC, sum should be equal 0. */
+	crc = comm_crc_get(buf, COMM_FRAME_SIZE);
 	if (0 != crc)
 	{
 		return COMM_ERR_CRC;
