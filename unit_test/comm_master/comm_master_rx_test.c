@@ -23,6 +23,8 @@ TEST_SETUP(comm_master_rx)
    memset(test_buf, 0xAA, TEST_BUF_SIZE);
 
    mock_comm_crc_init(0);
+   mock_comm_table_seq_init(SEQ);
+   prepare_buf(test_buf, ADDR, SEQ + 1);
 }
 
 TEST_TEAR_DOWN(comm_master_rx)
@@ -73,7 +75,28 @@ TEST(comm_master_rx, frame_addr)
 	TEST_ASSERT_EQUAL(addr, mock_comm_table_seq_arg_addr_get());
 }
 
+TEST(comm_master_rx, frame_seq)
+{
+	comm_seq_t seq_read;
+	comm_seq_t seq_sent;
+
+	seq_read = SEQ + 1;
+	seq_sent = SEQ;
+	mock_comm_table_seq_init(seq_sent);
+	prepare_buf(test_buf, ADDR, seq_read);
+
+	TEST_ASSERT_EQUAL(COMM_ERR_OK, comm_master_rx(test_buf));
+
+	seq_read = SEQ;
+	seq_sent = SEQ;
+	mock_comm_table_seq_init(seq_sent);
+	prepare_buf(test_buf, ADDR, seq_read);
+
+	TEST_ASSERT_EQUAL(COMM_ERR_SEQ, comm_master_rx(test_buf));
+}
+
 static void prepare_buf(uint8_t *buf, comm_addr_t addr, comm_seq_t seq)
 {
 	memcpy(&buf[0], &addr, sizeof(comm_addr_t));
+	memcpy(&buf[2], &seq, sizeof(comm_seq_t));
 }

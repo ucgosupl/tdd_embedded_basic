@@ -37,6 +37,8 @@ int32_t comm_master_rx(uint8_t *buf)
 {
 	comm_addr_t addr;
 	comm_crc_t crc;
+	comm_seq_t seq_sent;
+	comm_seq_t seq_read;
 
 	if (NULL == buf)
 	{
@@ -51,7 +53,14 @@ int32_t comm_master_rx(uint8_t *buf)
 	}
 
 	memcpy(&addr, &buf[0], sizeof(comm_addr_t));
-	comm_table_seq_get(addr);
+	seq_sent = comm_table_seq_get(addr);
+
+	memcpy(&seq_read, &buf[2], sizeof(comm_seq_t));
+
+	if (seq_sent + 1 != seq_read)
+	{
+		return COMM_ERR_SEQ;
+	}
 
 	return COMM_ERR_OK;
 }
